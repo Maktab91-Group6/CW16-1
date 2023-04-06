@@ -61,7 +61,7 @@ namespace CW16.Entity
 			}
 
 		}
-
+		//ADO.NET Method
 		//public void Edit(int id, string name, int quantity, string color, int unitPrice)
 		//{
 
@@ -90,7 +90,7 @@ namespace CW16.Entity
 		//}
 
 
-
+		//Dapper Method
 		public void Edit(int id, string name, int quantity, string color, int unitPrice)
 		{
 
