@@ -15,6 +15,29 @@ namespace CW16.Entity
 			connectionString = configuration.GetConnectionString("ConnectionOne");
 		}
 
+		public void AddToCartProduct(int id)
+		{
+			string queryString = "Insert Into ProductCart Values(@CustomerId, @ProductId)";
+
+			using (SqlConnection connection = new SqlConnection())
+			{
+				connection.ConnectionString = connectionString;
+				connection.Open();
+				SqlCommand command = new SqlCommand(queryString, connection);
+				command.Parameters.Add(new SqlParameter("CUstomerId", 1));
+				command.Parameters.Add(new SqlParameter("ProductId", id));
+
+
+
+				SqlDataReader reader = command.ExecuteReader();
+
+
+
+				reader.Close();
+			}
+
+		}
+
 		public void Create(Product product)
 		{
 			List<Product> products = new List<Product>();
@@ -180,5 +203,51 @@ namespace CW16.Entity
 
 			return products.FirstOrDefault();
 		}
+
+		public List<Product> GetProductForCart()
+		{
+			List<Product> products = new List<Product>();
+
+			string queryString = "SELECT * FROM Products p JOIN ProductCart pc ON p.Id=pc.ProductId";
+
+			using (SqlConnection connection = new SqlConnection())
+			{
+				connection.ConnectionString = connectionString;
+				connection.Open();
+				SqlCommand command = new SqlCommand(queryString, connection);
+				SqlDataReader reader = command.ExecuteReader();
+
+				while (reader.Read())
+				{
+					products.Add(new Product()
+					{
+						Id = Convert.ToInt32(reader["Id"]),
+						Name = reader["Name"].ToString(),
+						Color = reader["Color"].ToString(),
+						Quantity = Convert.ToInt32(reader["Quantity"]),
+						UnitPrice = Convert.ToInt32(reader["UnitPrice"])
+					});
+				}
+
+				reader.Close();
+			}
+			return products;
+		}
+
+		public void DeleteFromCart(int id)
+		{
+			string queryString = "DELETE FROM ProductCart WHERE ProductId=@id";
+
+			using (SqlConnection connection = new SqlConnection())
+			{
+				connection.ConnectionString = connectionString;
+				connection.Open();
+				SqlCommand command = new SqlCommand(queryString, connection);
+				command.Parameters.Add(new SqlParameter("id", id));
+				SqlDataReader reader = command.ExecuteReader();
+				reader.Close();
+			}
+		}
+
 	}
 }

@@ -15,6 +15,11 @@ namespace CW16.Service
 
 		public List<Product> GetAll();
 
+		public void AddToCart(int id);
+
+		public List<Product> GetProductsForCart();
+
+		public void DeleteFromCart(int id);
 
 
 	}

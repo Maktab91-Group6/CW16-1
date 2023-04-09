@@ -36,5 +36,20 @@ namespace CW16.Service
 		{
 			return _productRepository.GetAll();
 		}
+
+		public void AddToCart(int id)
+		{
+			_productRepository.AddToCartProduct(id);
+		}
+
+		public List<Product> GetProductsForCart()
+		{
+			return _productRepository.GetProductForCart();
+		}
+
+		public void DeleteFromCart(int id)
+		{
+			_productRepository.DeleteFromCart(id);
+		}
 	}
 }

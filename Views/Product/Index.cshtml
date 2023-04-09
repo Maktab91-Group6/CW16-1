@@ -56,6 +56,7 @@
 						@Model[i].UnitPrice
 										</td>
 										<td>
+
 		<!-- A link that triggers the modal -->
 		<a type="button" data-bs-toggle="modal" data-bs-target="#deleteModal" class="btn btn-danger">حذف</a>
 
@@ -84,9 +85,10 @@
 												بروزرسانی
 											</a>
 
-
+													<a class="btn btn-success" asp-controller="Product" asp-action="AddToCart" asp-route-id="@Model[i].Id">اضافه به سبد خرید</a>
 
 										</td>
+										
 									</tr>
 			}
 

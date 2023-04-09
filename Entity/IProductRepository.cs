@@ -14,8 +14,10 @@
 
 		public List<Product> GetAll();
 
+		public void AddToCartProduct(int id);
 
+		public List<Product> GetProductForCart();
 
-
+		public void DeleteFromCart(int id);
 	}
 }

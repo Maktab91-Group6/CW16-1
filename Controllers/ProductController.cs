@@ -53,9 +53,28 @@ namespace CW16.Controllers
 			return View();
 		}
 
+		public IActionResult AddToCart(int id)
+		{
+			_productService.AddToCart(id);
+			return RedirectToAction(nameof(Index));
+		}
 
 
+		public IActionResult ShowProductCart()
+		{
+			var ProductList = _productService.GetProductsForCart();
+			return View(ProductList);
+		}
 
+		public IActionResult DeleteFromCart(int id)
+		{
+			_productService.DeleteFromCart(id);
+			return RedirectToAction(nameof(ShowProductCart));
+		}
 
+		public IActionResult FinalFactor() 
+		{
+			//
+		}
 	}
 }
